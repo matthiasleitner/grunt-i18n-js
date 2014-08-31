@@ -36,13 +36,14 @@ module.exports = function(grunt) {
   }
 
   function save(translationData, filepath){
+    filepath = filepath.replace("app/assets/javascripts/", "");
+
     var contents = "var I18n = I18n || {}; \n";
     contents += "I18n.translations = ";
     contents += JSON.stringify(translationData);
     contents += ";";
 
-    grunt.log.writeln("Saving to file "+ JSON.stringify(filepath));
-
+    grunt.log.writeln("Saving to file " + filepath);
     grunt.file.write(filepath, contents);
   }
 
