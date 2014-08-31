@@ -1,0 +1,7 @@
+translations:
+  - file: "app/assets/javascripts/i18n/translations/%{locale}/records_onboarding.js"
+    only: "records_onboarding"
+
+  - file: "app/assets/javascripts/i18n/translations/%{locale}/records.js"
+    only: "records"
+    fallback: true
