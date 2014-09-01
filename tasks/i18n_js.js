@@ -15,6 +15,7 @@ module.exports = function(grunt) {
   var done = null;
   var translations = {};
   var options = {};
+  var I18N_AVAILABLE_LOCALES = ["en","de","es","it","nl","fr","cs","ja","pl","pt-br","pt-pt","ru","zh","tr"];
 
   grunt.registerMultiTask('i18n', 'Convert rails locales to i18n-js compatible js files', function() {    
     done = this.async();
@@ -66,8 +67,8 @@ module.exports = function(grunt) {
   }
 
   function mergeWithFallback(result, locale, scope, fallback){
-    var fallbackLoc= fallbackLocale(fallback);
-    var fallbackScope = scopeWithLocale(scope, fallbackLoc);
+    var fallbackLoc    = fallbackLocale(fallback);
+    var fallbackScope  = scopeWithLocale(scope, fallbackLoc);
     var fallbackResult = scopedTranslations(fallbackScope)
    
     if(!result[locale]) {
@@ -87,9 +88,6 @@ module.exports = function(grunt) {
     var flatScopes = _.flatten([scopes]);
 
     flatScopes.forEach(function(scope){
-      grunt.log.write("scopedTranslations ");
-      grunt.log.writeln(scope);
-      grunt.log.writeln(JSON.stringify(filter(translations, scope)));
       _.merge(result, filter(translations, scope));
     });
 
@@ -136,17 +134,13 @@ module.exports = function(grunt) {
   }
 
   function fallbackLocale(locale){
-    return availableLocales().indexOf(locale) > 0 ? locale : "en";
-  }
-
-  function availableLocales(){
-    return ["en","de","es","it","nl","fr","cs","ja","pl","pt-br","pt-pt","ru","zh","tr"];
+    return I18N_AVAILABLE_LOCALES.indexOf(locale) > 0 ? locale : "en";
   }
 
   function segmentsPerLocale(pattern, scope, fallback){
     var segments = {};
 
-    availableLocales().forEach(function(locale){
+    I18N_AVAILABLE_LOCALES.forEach(function(locale){
       var localeScopes = scopeWithLocale(scope, locale);
       var result = scopedTranslations(localeScopes);
 
@@ -230,6 +224,7 @@ module.exports = function(grunt) {
       readLocaleFile(path);
     });
   }
+
   function readLocaleFile(path){
     _.merge(translations, grunt.file.readYAML(path));
   }
