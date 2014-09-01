@@ -40,9 +40,10 @@ module.exports = function(grunt) {
     filepath = filepath.replace("app/assets/javascripts/", "");
 
     var contents = "var I18n = I18n || {}; \n";
-    contents += "I18n.translations = ";
+    contents += "I18n.translations = I18n.translations || {}; \n";
+    contents += "jQuery.extend(true, I18n.translations, ";
     contents += JSON.stringify(translationData);
-    contents += ";";
+    contents += ");";
 
     grunt.log.writeln("Saving to file " + filepath);
     grunt.file.write(filepath, contents);
