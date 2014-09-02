@@ -39,9 +39,9 @@ module.exports = function(grunt) {
   function save(translationData, filepath){
     filepath = filepath.replace("app/assets/javascripts/", "");
 
-    var contents = "var I18n = I18n || {}; \n";
-    contents += "I18n.translations = I18n.translations || {}; \n";
-    contents += "jQuery.extend(true, I18n.translations, ";
+    var contents = "window.I18n = window.I18n || {}; \n";
+    contents += "window.I18n.translations = window.I18n.translations || {}; \n";
+    contents += "jQuery.extend(true, window.I18n.translations, ";
     contents += JSON.stringify(translationData);
     contents += ");";
 
