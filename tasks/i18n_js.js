@@ -76,7 +76,7 @@ module.exports = function(grunt) {
       result[locale] = {};
     }
     
-    _.merge(fallbackResult[fallbackLoc],result[locale]);
+    result[locale] = _.merge(fallbackResult[fallbackLoc],result[locale]);
   }
 
   function scopeWithLocale(scope, locale){
