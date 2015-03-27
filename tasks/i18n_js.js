@@ -15,7 +15,7 @@ module.exports = function(grunt) {
   var done = null;
   var translations = {};
   var options = {};
-  var I18N_AVAILABLE_LOCALES = ['en','de','es','it','nl','fr','cs','ja','pl','pt-br','pt-pt','ru','zh','tr'];
+  var I18N_AVAILABLE_LOCALES = ['en','de','es','it','nl','fr','cs','ja','pl','pt-br','pt-pt','ru','zh','tr','ko'];
 
   grunt.registerMultiTask('i18n', 'Convert rails locales to i18n-js compatible js files', function() {
     done = this.async();
