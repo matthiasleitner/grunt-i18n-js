@@ -200,7 +200,7 @@ module.exports = function(grunt) {
     var walker  = walk.walk(localePath(), { followLinks: false });
 
     walker.on('file', function(root, stat, next) {
-      if(_.contains(stat.name, '.yml')){
+      if(_.includes(stat.name, '.yml')){
         files.push(root + '/' + stat.name);
       }
       next();
