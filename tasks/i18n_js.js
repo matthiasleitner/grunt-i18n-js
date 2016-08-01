@@ -41,13 +41,19 @@ module.exports = function(grunt) {
   }
 
   function save(translationData, filepath){
+    var payload  = JSON.stringify(translationData);
+    var contents = null;
     filepath = filepath.replace('app/assets/javascripts/', '');
-
-    var contents = 'var I18n = I18n || {}; \n';
-    contents += 'I18n.translations = I18n.translations || {}; \n';
-    contents += 'jQuery.extend(true, I18n.translations, ';
-    contents += JSON.stringify(translationData);
-    contents += ');';
+    if(options.saveAsJSON){
+      contents = payload;
+      filepath = filepath.replace('.js', '.json');
+    } else {
+      contents = 'var I18n = I18n || {}; \n';
+      contents += 'I18n.translations = I18n.translations || {}; \n';
+      contents += 'jQuery.extend(true, I18n.translations, ';
+      contents += payload;
+      contents += ');';
+    }
 
     grunt.log.writeln('Saving to file ' + filepath);
     grunt.file.write(filepath, contents);
