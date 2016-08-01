@@ -1,7 +1,7 @@
 {
   "name": "grunt-i18n-js",
   "description": "Convert rails locales to i18n-js compatible js files",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "homepage": "https://github.com/matthiasleitner/grunt-i18n-js",
   "author": {
     "name": "Matthias Leitner",
